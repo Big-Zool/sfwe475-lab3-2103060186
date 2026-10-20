@@ -21,4 +21,12 @@
 <!-- Write what you observed -->
 
 
+## Strand 3 — The round trip of one click
+
+**Explain the full round trip of clicking "Add": which component owns the state, which component asked for the change, and how did the request get from one to the other?**
+
+<!-- Write your answer in your own words -->
+
+
+
 
