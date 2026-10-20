@@ -5,9 +5,10 @@ import TaskCard from "./TaskCard";
 type TaskListProps = {
   tasks: Task[];
   filter: Filter;
+  onToggleTask: (id: number) => void;
 };
 
-function TaskList({ tasks, filter }: TaskListProps) {
+function TaskList({ tasks, filter, onToggleTask }: TaskListProps) {
   const visibleTasks = tasks.filter((task) => {
     if (filter === "done") return task.done;
     if (filter === "open") return !task.done;
@@ -17,7 +18,14 @@ function TaskList({ tasks, filter }: TaskListProps) {
   return (
     <div>
       {visibleTasks.map((task) => (
-        <TaskCard key={task.id} title={task.title} done={task.done} />
+        <TaskCard
+          key={task.id}
+          id={task.id}
+          title={task.title}
+          done={task.done}
+          dueDate={task.dueDate}
+          onToggleTask={onToggleTask}
+        />
       ))}
     </div>
   );

@@ -15,11 +15,23 @@ function TaskBoard() {
     setTasks([...tasks, { id: tasks.length + 1, title, done: false }]);
   }
 
+  function handleToggleTask(id: number) {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, done: !task.done } : task,
+      ),
+    );
+  }
+
   return (
     <div>
       <NewTaskInput onAddTask={handleAddTask} />
       <FilterBar filter={filter} onFilterChange={setFilter} />
-      <TaskList tasks={tasks} filter={filter} />
+      <TaskList
+        tasks={tasks}
+        filter={filter}
+        onToggleTask={handleToggleTask}
+      />
     </div>
   );
 }
