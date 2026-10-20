@@ -1,10 +1,22 @@
 import type { Task } from "./schemas";
+import type { Filter } from "./FilterBar";
 import TaskCard from "./TaskCard";
 
-function TaskList({ tasks }: { tasks: Task[] }) {
+type TaskListProps = {
+  tasks: Task[];
+  filter: Filter;
+};
+
+function TaskList({ tasks, filter }: TaskListProps) {
+  const visibleTasks = tasks.filter((task) => {
+    if (filter === "done") return task.done;
+    if (filter === "open") return !task.done;
+    return true;
+  });
+
   return (
     <div>
-      {tasks.map((task) => (
+      {visibleTasks.map((task) => (
         <TaskCard key={task.id} title={task.title} done={task.done} />
       ))}
     </div>
