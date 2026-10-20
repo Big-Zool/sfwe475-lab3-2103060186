@@ -1,11 +1,10 @@
-import { useState } from "react";
 import type { Task } from "./schemas";
 
-type TaskCardProps = Pick<Task, "title" | "done" | "dueDate">;
+type TaskCardProps = Pick<Task, "id" | "title" | "done" | "dueDate"> & {
+  onToggleTask: (id: number) => void;
+};
 
-function TaskCard({ title, done: initialDone, dueDate }: TaskCardProps) {
-  const [done, setDone] = useState(initialDone);
-
+function TaskCard({ id, title, done, dueDate, onToggleTask }: TaskCardProps) {
   return (
     <div className="task-card">
       <h3>{title}</h3>
@@ -13,7 +12,7 @@ function TaskCard({ title, done: initialDone, dueDate }: TaskCardProps) {
       <input
         type="checkbox"
         checked={done}
-        onChange={() => setDone(!done)}
+        onChange={() => onToggleTask(id)}
       />
     </div>
   );
