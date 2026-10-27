@@ -20,3 +20,10 @@ If the loading message shows for only 50ms, it flashes and looks like a glitch. 
 ## Strand 2 Challenge — Why is the disabled button not enough?
 
 `disabled` only blocks clicking the button. Anyone can remove it in DevTools and submit an empty title. I tried it, and Zod still caught it. So Zod is the real check, and the disabled button is only a hint for the user.
+
+
+## Strand 3 — Keyboard-only pass
+
+Using only Tab, Shift+Tab and Enter, I could reach the title field, type, reach the "Add task" button and submit. Everything worked.
+
+The task checkboxes had no name, so a screen reader would only say "checkbox". I fixed this in the Challenge step.

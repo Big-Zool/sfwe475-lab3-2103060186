@@ -28,13 +28,24 @@ function NewTaskForm({ onAddTask }: NewTaskFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      <label htmlFor="title">Task title</label>
+      <input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
       {errors.title && <p>{errors.title[0]}</p>}
 
-      <input value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+      <label htmlFor="dueDate">Due date</label>
+      <input
+        id="dueDate"
+        value={dueDate}
+        onChange={(e) => setDueDate(e.target.value)}
+      />
       {errors.dueDate && <p>{errors.dueDate[0]}</p>}
 
-      <select value={status} onChange={(e) => setStatus(e.target.value)}>
+      <label htmlFor="status">Status</label>
+      <select
+        id="status"
+        value={status}
+        onChange={(e) => setStatus(e.target.value)}
+      >
         <option value="open">Open</option>
         <option value="doing">Doing</option>
         <option value="done">Done</option>
