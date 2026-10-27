@@ -27,3 +27,8 @@ If the loading message shows for only 50ms, it flashes and looks like a glitch. 
 Using only Tab, Shift+Tab and Enter, I could reach the title field, type, reach the "Add task" button and submit. Everything worked.
 
 The task checkboxes had no name, so a screen reader would only say "checkbox". I fixed this in the Challenge step.
+
+
+## Strand 3 — Vague button text
+
+The filter buttons said "All", "Done" and "Open", which is vague. I changed them to "Show all tasks", "Show done tasks" and "Show open tasks".

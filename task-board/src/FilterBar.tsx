@@ -1,9 +1,9 @@
 export type Filter = "all" | "done" | "open";
 
 const filters: { value: Filter; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "done", label: "Done" },
-  { value: "open", label: "Open" },
+  { value: "all", label: "Show all tasks" },
+  { value: "done", label: "Show done tasks" },
+  { value: "open", label: "Show open tasks" },
 ];
 
 type FilterBarProps = {
