@@ -42,7 +42,13 @@ function TaskBoard() {
   function handleAddTask(input: CreateTaskInput) {
     setTasks([
       ...tasks,
-      { id: tasks.length + 1, title: input.title, dueDate: input.dueDate, done: false },
+      {
+        id: tasks.length + 1,
+        title: input.title,
+        dueDate: input.dueDate,
+        status: input.status,
+        done: input.status === "done",
+      },
     ]);
     setStatus("success");
   }

@@ -8,11 +8,12 @@ type NewTaskFormProps = {
 function NewTaskForm({ onAddTask }: NewTaskFormProps) {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [status, setStatus] = useState("open");
   const [errors, setErrors] = useState<Record<string, string[]>>({});
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const result = CreateTaskSchema.safeParse({ title, dueDate });
+    const result = CreateTaskSchema.safeParse({ title, dueDate, status });
 
     if (!result.success) {
       setErrors(result.error.flatten().fieldErrors);
@@ -22,6 +23,7 @@ function NewTaskForm({ onAddTask }: NewTaskFormProps) {
     onAddTask(result.data);
     setTitle("");
     setDueDate("");
+    setStatus("open");
   }
 
   return (
@@ -31,6 +33,13 @@ function NewTaskForm({ onAddTask }: NewTaskFormProps) {
 
       <input value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
       {errors.dueDate && <p>{errors.dueDate[0]}</p>}
+
+      <select value={status} onChange={(e) => setStatus(e.target.value)}>
+        <option value="open">Open</option>
+        <option value="doing">Doing</option>
+        <option value="done">Done</option>
+      </select>
+      {errors.status && <p>{errors.status[0]}</p>}
 
       <button type="submit">Add task</button>
     </form>

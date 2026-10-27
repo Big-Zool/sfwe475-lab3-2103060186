@@ -24,6 +24,7 @@ function TaskList({ tasks, filter, onToggleTask }: TaskListProps) {
           title={task.title}
           done={task.done}
           dueDate={task.dueDate}
+          status={task.status}
           onToggleTask={onToggleTask}
         />
       ))}
