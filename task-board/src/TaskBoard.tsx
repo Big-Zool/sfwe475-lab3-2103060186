@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { Task } from "./schemas";
+import type { CreateTaskInput, Task } from "./schemas";
 import { simulateFetchTasks } from "./mockApi";
 import TaskList from "./TaskList";
-import NewTaskInput from "./NewTaskInput";
+import NewTaskForm from "./NewTaskForm";
 import FilterBar, { type Filter } from "./FilterBar";
 
 const MIN_LOADING_MS = 400;
@@ -39,8 +39,12 @@ function TaskBoard() {
     setAttempt(attempt + 1);
   }
 
-  function handleAddTask(title: string) {
-    setTasks([...tasks, { id: tasks.length + 1, title, done: false }]);
+  function handleAddTask(input: CreateTaskInput) {
+    setTasks([
+      ...tasks,
+      { id: tasks.length + 1, title: input.title, dueDate: input.dueDate, done: false },
+    ]);
+    setStatus("success");
   }
 
   function handleToggleTask(id: number) {
@@ -59,11 +63,17 @@ function TaskBoard() {
         <button onClick={handleRetry}>Try again</button>
       </div>
     );
-  if (status === "empty") return <p>No tasks yet. Add your first one below.</p>;
+  if (status === "empty")
+    return (
+      <div>
+        <p>No tasks yet. Add your first one below.</p>
+        <NewTaskForm onAddTask={handleAddTask} />
+      </div>
+    );
 
   return (
     <div>
-      <NewTaskInput onAddTask={handleAddTask} />
+      <NewTaskForm onAddTask={handleAddTask} />
       <FilterBar filter={filter} onFilterChange={setFilter} />
       <TaskList
         tasks={tasks}
