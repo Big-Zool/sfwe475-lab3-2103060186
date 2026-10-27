@@ -10,6 +10,7 @@ function TaskBoard() {
     useState<"loading" | "success" | "empty" | "error">("loading");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<Filter>("all");
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     simulateFetchTasks()
@@ -18,7 +19,12 @@ function TaskBoard() {
         setStatus(data.length === 0 ? "empty" : "success");
       })
       .catch(() => setStatus("error"));
-  }, []);
+  }, [attempt]);
+
+  function handleRetry() {
+    setStatus("loading");
+    setAttempt(attempt + 1);
+  }
 
   function handleAddTask(title: string) {
     setTasks([...tasks, { id: tasks.length + 1, title, done: false }]);
@@ -33,7 +39,13 @@ function TaskBoard() {
   }
 
   if (status === "loading") return <p>Loading tasks...</p>;
-  if (status === "error") return <p>We couldn't load your tasks.</p>;
+  if (status === "error")
+    return (
+      <div>
+        <p>We couldn't load your tasks.</p>
+        <button onClick={handleRetry}>Try again</button>
+      </div>
+    );
   if (status === "empty") return <p>No tasks yet. Add your first one below.</p>;
 
   return (
