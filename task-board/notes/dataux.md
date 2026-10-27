@@ -32,3 +32,12 @@ The task checkboxes had no name, so a screen reader would only say "checkbox". I
 ## Strand 3 — Vague button text
 
 The filter buttons said "All", "Done" and "Open", which is vague. I changed them to "Show all tasks", "Show done tasks" and "Show open tasks".
+
+
+## Strand 3 Challenge — Lighthouse audit
+
+**Score before: 85**
+
+Issue fixed: the task checkboxes had no label. I added an `aria-label` like "Mark Read Chapter 4 as done".
+
+**Score after: 93**

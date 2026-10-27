@@ -14,6 +14,7 @@ function TaskCard({ id, title, done, dueDate, status, onToggleTask }: TaskCardPr
         type="checkbox"
         checked={done}
         onChange={() => onToggleTask(id)}
+        aria-label={`Mark "${title}" as done`}
       />
     </div>
   );
