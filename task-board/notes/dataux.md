@@ -10,3 +10,8 @@
 ## Strand 1 — Why are empty and error separate?
 
 Empty means the request worked but there are no tasks yet, so we invite the user to add one. Error means the request failed, so we tell the user and let them try again. If they were one state, a new user would think the app is broken.
+
+
+## Strand 1 Challenge — Why keep "Loading" for at least 400ms?
+
+If the loading message shows for only 50ms, it flashes and looks like a glitch. Keeping it for 400ms looks smoother. Fast responses become a little slower, but slow responses are not affected.

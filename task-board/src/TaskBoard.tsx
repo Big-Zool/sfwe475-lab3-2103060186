@@ -5,6 +5,8 @@ import TaskList from "./TaskList";
 import NewTaskInput from "./NewTaskInput";
 import FilterBar, { type Filter } from "./FilterBar";
 
+const MIN_LOADING_MS = 400;
+
 function TaskBoard() {
   const [status, setStatus] =
     useState<"loading" | "success" | "empty" | "error">("loading");
@@ -13,12 +15,23 @@ function TaskBoard() {
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    const startedAt = Date.now();
+
+    // Wait until the loading message has been visible for at least
+    // MIN_LOADING_MS before changing the status (the fetch itself is not delayed).
+    function finishLoading(update: () => void) {
+      const elapsed = Date.now() - startedAt;
+      setTimeout(update, Math.max(0, MIN_LOADING_MS - elapsed));
+    }
+
     simulateFetchTasks()
-      .then((data) => {
-        setTasks(data);
-        setStatus(data.length === 0 ? "empty" : "success");
-      })
-      .catch(() => setStatus("error"));
+      .then((data) =>
+        finishLoading(() => {
+          setTasks(data);
+          setStatus(data.length === 0 ? "empty" : "success");
+        }),
+      )
+      .catch(() => finishLoading(() => setStatus("error")));
   }, [attempt]);
 
   function handleRetry() {
