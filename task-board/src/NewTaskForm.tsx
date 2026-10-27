@@ -41,7 +41,9 @@ function NewTaskForm({ onAddTask }: NewTaskFormProps) {
       </select>
       {errors.status && <p>{errors.status[0]}</p>}
 
-      <button type="submit">Add task</button>
+      <button type="submit" disabled={title.trim() === ""}>
+        Add task
+      </button>
     </form>
   );
 }

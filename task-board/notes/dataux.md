@@ -15,3 +15,8 @@ Empty means the request worked but there are no tasks yet, so we invite the user
 ## Strand 1 Challenge — Why keep "Loading" for at least 400ms?
 
 If the loading message shows for only 50ms, it flashes and looks like a glitch. Keeping it for 400ms looks smoother. Fast responses become a little slower, but slow responses are not affected.
+
+
+## Strand 2 Challenge — Why is the disabled button not enough?
+
+`disabled` only blocks clicking the button. Anyone can remove it in DevTools and submit an empty title. I tried it, and Zod still caught it. So Zod is the real check, and the disabled button is only a hint for the user.
